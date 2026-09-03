@@ -18,6 +18,12 @@ function moveWeekday(date, direction) {
   while (!isWeekday(d)) d = moveDate(d, direction > 0 ? 1 : -1);
   return d;
 }
+function getMonday(date) {
+  const d = new Date(date);
+  const day = d.getDay();
+  d.setDate(d.getDate() - (day === 0 ? 6 : day - 1));
+  return d;
+}
 let selected = todayInKorea();
 if (!isWeekday(selected)) selected = moveWeekday(selected, selected.getDay() === 0 ? -1 : 1);
 
@@ -44,10 +50,15 @@ function render() {
 function renderWeek() {
   const root = $('weekList');
   root.innerHTML = '';
-  $('weekLabel').textContent = '평일 5일';
 
-  const today = todayInKorea();
-  const monday = moveDate(today, -(today.getDay() === 0 ? 6 : today.getDay() - 1));
+  // 선택한 날짜가 속한 주를 기준으로 주 급식을 표시한다.
+  // 따라서 다음 주 월요일로 넘어가면 '이번 주 급식'도 다음 주로 함께 이동한다.
+  const monday = getMonday(selected);
+  const sunday = moveDate(monday, 6);
+  const mondayKey = toKey(monday);
+  const sundayKey = toKey(sunday);
+  const todayKey = toKey(todayInKorea());
+  $('weekLabel').textContent = `${monday.getMonth() + 1}/${monday.getDate()}–${sunday.getMonth() + 1}/${sunday.getDate()}`;
 
   for (let i = 0; i < 5; i++) {
     const d = moveDate(monday, i);
