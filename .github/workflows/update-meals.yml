@@ -18,8 +18,8 @@ jobs:
           python-version: '3.x'
       - name: Install dependencies
         run: pip install requests beautifulsoup4
-      - name: Fetch meals
-        run: python scripts/fetch_meals.py
+      - name: Fetch one month of meals
+        run: python scripts/fetch_meals_monthly.py
       - name: Commit updated data
         run: |
           git config user.name 'github-actions[bot]'
