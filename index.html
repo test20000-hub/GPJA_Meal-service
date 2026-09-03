@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111827" />
+  <title>군포중앙고 급식</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <div>
+        <p class="eyebrow">GPJA MEAL SERVICE</p>
+        <h1>군포중앙고 급식</h1>
+        <p class="sub">오늘의 급식을 빠르게 확인하세요.</p>
+      </div>
+      <a class="source" href="https://gpjago.goegu.kr/gpjago/ad/fm/foodmenu/selectFoodMenuView.do?mi=2772" target="_blank" rel="noopener">학교 원본 ↗</a>
+    </header>
+
+    <section class="date-nav" aria-label="날짜 선택">
+      <button id="prevBtn" aria-label="이전 날짜">‹</button>
+      <button id="todayBtn">오늘</button>
+      <div id="dateLabel">불러오는 중…</div>
+      <button id="nextBtn" aria-label="다음 날짜">›</button>
+    </section>
+
+    <section id="mealCard" class="meal-card loading">
+      <div class="card-top">
+        <span id="dayLabel">—</span>
+        <span id="kcal">—</span>
+      </div>
+      <h2 id="mealTitle">급식을 불러오는 중입니다</h2>
+      <ul id="menuList" class="menu-list"></ul>
+      <p id="emptyMessage" class="empty hidden">이 날짜에는 등록된 급식이 없습니다.</p>
+    </section>
+
+    <section class="week-section">
+      <div class="section-title">
+        <h2>이번 주 급식</h2>
+        <span id="weekLabel"></span>
+      </div>
+      <div id="weekList" class="week-list"></div>
+    </section>
+
+    <footer>
+      <p>급식 정보는 군포중앙고등학교 공개 식단을 기준으로 제공합니다.</p>
+      <p id="updatedAt"></p>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
