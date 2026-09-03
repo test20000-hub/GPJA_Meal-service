@@ -32,17 +32,19 @@ function render() {
       $('menuList').appendChild(li);
     });
   }
-  renderMonth();
+  renderWeek();
 }
 
-function renderMonth() {
+function renderWeek() {
   const root = $('weekList');
   root.innerHTML = '';
-  $('weekLabel').textContent = '오늘부터 1개월 · 평일만 표시';
+  $('weekLabel').textContent = '평일 5일';
 
-  for (let i = 0; i < 31; i++) {
-    const d = moveDate(todayInKorea(), i);
-    if (!isWeekday(d)) continue;
+  const today = todayInKorea();
+  const monday = moveDate(today, -(today.getDay() === 0 ? 6 : today.getDay() - 1));
+
+  for (let i = 0; i < 5; i++) {
+    const d = moveDate(monday, i);
     const key = toKey(d);
     const meal = meals[key];
     const item = document.createElement('button');
