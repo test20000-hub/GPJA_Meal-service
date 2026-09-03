@@ -4,39 +4,14 @@ const isoFmt = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Seoul' });
 let meals = {};
 
 const $ = (id) => document.getElementById(id);
-
-function toKey(date) {
-  return isoFmt.format(date);
-}
-
+function toKey(date) { return isoFmt.format(date); }
 function todayInKorea() {
   const key = toKey(new Date());
   const [year, month, day] = key.split('-').map(Number);
   return new Date(year, month - 1, day);
 }
-
-function displayDate(date) {
-  return dateFmt.format(date);
-}
-
-function moveDate(date, amount) {
-  const d = new Date(date);
-  d.setDate(d.getDate() + amount);
-  return d;
-}
-
-function startOfWeek(date) {
-  const d = new Date(date);
-  const day = d.getDay();
-  d.setDate(d.getDate() - day);
-  d.setHours(0, 0, 0, 0);
-  return d;
-}
-
-function endOfWeek(date) {
-  return moveDate(startOfWeek(date), 6);
-}
-
+function displayDate(date) { return dateFmt.format(date); }
+function moveDate(date, amount) { const d = new Date(date); d.setDate(d.getDate() + amount); return d; }
 let selected = todayInKorea();
 
 function render() {
@@ -49,7 +24,6 @@ function render() {
   $('emptyMessage').classList.toggle('hidden', !!meal);
   $('mealTitle').textContent = meal ? '오늘의 급식' : '급식 정보가 없습니다';
   $('kcal').textContent = meal?.kcal ? `${meal.kcal} kcal` : '';
-
   if (meal) {
     (meal.menu || []).forEach(item => {
       const li = document.createElement('li');
@@ -57,20 +31,16 @@ function render() {
       $('menuList').appendChild(li);
     });
   }
-
-  renderWeek();
+  renderMonth();
 }
 
-function renderWeek() {
-  const start = startOfWeek(selected);
-  const end = endOfWeek(selected);
-  $('weekLabel').textContent = `${start.toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' })} ~ ${end.toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' })}`;
-
+function renderMonth() {
   const root = $('weekList');
   root.innerHTML = '';
+  $('weekLabel').textContent = '오늘부터 1개월 급식';
 
-  for (let i = 0; i < 7; i++) {
-    const d = moveDate(start, i);
+  for (let i = 0; i < 31; i++) {
+    const d = moveDate(todayInKorea(), i);
     const key = toKey(d);
     const meal = meals[key];
     const item = document.createElement('button');
@@ -82,37 +52,20 @@ function renderWeek() {
 
     const menu = document.createElement('span');
     menu.className = 'week-menu';
-    menu.textContent = meal ? (meal.menu || []).join(' · ') : '급식 없음';
+    menu.textContent = meal ? (meal.menu || []).join(' · ') : '급식 정보 없음';
 
     item.append(date, menu);
-    item.onclick = () => {
-      selected = d;
-      render();
-    };
+    item.onclick = () => { selected = d; render(); };
     root.appendChild(item);
   }
 }
 
-$('prevBtn').onclick = () => {
-  selected = moveDate(selected, -1);
-  render();
-};
-
-$('nextBtn').onclick = () => {
-  selected = moveDate(selected, 1);
-  render();
-};
-
-$('todayBtn').onclick = () => {
-  selected = todayInKorea();
-  render();
-};
+$('prevBtn').onclick = () => { selected = moveDate(selected, -1); render(); };
+$('nextBtn').onclick = () => { selected = moveDate(selected, 1); render(); };
+$('todayBtn').onclick = () => { selected = todayInKorea(); render(); };
 
 fetch(DATA_URL, { cache: 'no-store' })
-  .then(response => {
-    if (!response.ok) throw new Error('데이터 요청 실패');
-    return response.json();
-  })
+  .then(response => { if (!response.ok) throw new Error('데이터 요청 실패'); return response.json(); })
   .then(data => {
     meals = data.meals || {};
     $('updatedAt').textContent = data.updatedAt ? `데이터 업데이트: ${data.updatedAt}` : '';
