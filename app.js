@@ -18,6 +18,12 @@ function moveWeekday(date, direction) {
   while (!isWeekday(d)) d = moveDate(d, direction > 0 ? 1 : -1);
   return d;
 }
+function moveWeek(date, direction) {
+  // 이전/다음 버튼은 날짜가 아니라 '주' 단위로 이동합니다.
+  let d = moveDate(date, direction * 7);
+  if (!isWeekday(d)) d = moveWeekday(d, direction > 0 ? 1 : -1);
+  return d;
+}
 function getMonday(date) {
   const d = new Date(date);
   const day = d.getDay();
@@ -51,7 +57,7 @@ function renderWeek() {
   const root = $('weekList');
   root.innerHTML = '';
 
-  // '이번 주'는 오늘이 아니라 현재 선택된 날짜가 속한 주를 기준으로 한다.
+  // 선택된 날짜가 속한 주의 월~금만 표시합니다.
   const monday = getMonday(selected);
   const sunday = moveDate(monday, 6);
   $('weekLabel').textContent = `${monday.getMonth() + 1}/${monday.getDate()}–${sunday.getMonth() + 1}/${sunday.getDate()}`;
@@ -77,8 +83,8 @@ function renderWeek() {
   }
 }
 
-$('prevBtn').onclick = () => { selected = moveWeekday(selected, -1); render(); };
-$('nextBtn').onclick = () => { selected = moveWeekday(selected, 1); render(); };
+$('prevBtn').onclick = () => { selected = moveWeek(selected, -1); render(); };
+$('nextBtn').onclick = () => { selected = moveWeek(selected, 1); render(); };
 $('todayBtn').onclick = () => {
   selected = todayInKorea();
   if (!isWeekday(selected)) selected = moveWeekday(selected, selected.getDay() === 0 ? -1 : 1);
