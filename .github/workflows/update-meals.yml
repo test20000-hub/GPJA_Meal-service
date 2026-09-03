@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'scripts/fetch_meals.py'
+      - 'scripts/fetch_neis_meals.py'
       - '.github/workflows/update-meals.yml'
 
 permissions:
@@ -21,13 +21,15 @@ jobs:
         with:
           python-version: '3.x'
       - name: Install dependencies
-        run: pip install requests beautifulsoup4
-      - name: Fetch meals
-        run: python scripts/fetch_meals.py
+        run: pip install requests
+      - name: Fetch meals from NEIS
+        env:
+          NEIS_API_KEY: ${{ secrets.NEIS_API_KEY }}
+        run: python scripts/fetch_neis_meals.py
       - name: Commit updated data
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/meals.json
-          git diff --cached --quiet || git commit -m 'chore: update school meals'
+          git diff --cached --quiet || git commit -m 'chore: update school meals from NEIS'
           git push
