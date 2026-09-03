@@ -8,9 +8,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="군포중앙고 급식" />
-  <link rel="manifest" href="manifest.webmanifest?v=20260903-2" />
-  <link rel="icon" href="1788425827851.png?v=20260903-2" type="image/png" />
-  <link rel="apple-touch-icon" href="1788425827851.png?v=20260903-2" />
+  <link rel="manifest" href="manifest.webmanifest?v=20260903-3" />
+  <link rel="icon" href="1788425827851.png?v=20260903-3" type="image/png" />
+  <link rel="apple-touch-icon" href="1788425827851.png?v=20260903-3" />
   <title>군포중앙고 급식</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -28,11 +28,11 @@
       <a class="source" href="https://gpjago.goegu.kr/gpjago/ad/fm/foodmenu/selectFoodMenuView.do?mi=2772" target="_blank" rel="noopener">학교 원본 <span>↗</span></a>
     </header>
 
-    <section class="date-nav" aria-label="날짜 선택">
-      <button id="prevBtn" class="icon-btn" aria-label="이전 평일">‹</button>
+    <section class="date-nav" aria-label="주간 선택">
+      <button id="prevBtn" class="icon-btn" aria-label="이전 주">‹</button>
       <button id="todayBtn" class="today-btn">오늘</button>
       <div id="dateLabel">불러오는 중…</div>
-      <button id="nextBtn" class="icon-btn" aria-label="다음 평일">›</button>
+      <button id="nextBtn" class="icon-btn" aria-label="다음 주">›</button>
     </section>
 
     <section id="mealCard" class="meal-card loading">
@@ -65,9 +65,9 @@
       <p id="updatedAt"></p>
     </footer>
   </main>
-  <script src="app.js?v=20260903-2"></script>
+  <script src="app.js?v=20260903-3"></script>
   <script>
-    if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=20260903-2'));
+    if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=20260903-3'));
   </script>
 </body>
 </html>
