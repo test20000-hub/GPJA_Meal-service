@@ -13,7 +13,13 @@ function todayInKorea() {
 function displayDate(date) { return dateFmt.format(date); }
 function moveDate(date, amount) { const d = new Date(date); d.setDate(d.getDate() + amount); return d; }
 function isWeekday(date) { return date.getDay() !== 0 && date.getDay() !== 6; }
+function moveWeekday(date, direction) {
+  let d = moveDate(date, direction);
+  while (!isWeekday(d)) d = moveDate(d, direction > 0 ? 1 : -1);
+  return d;
+}
 let selected = todayInKorea();
+if (!isWeekday(selected)) selected = moveWeekday(selected, selected.getDay() === 0 ? -1 : 1);
 
 function render() {
   const key = toKey(selected);
@@ -64,9 +70,13 @@ function renderWeek() {
   }
 }
 
-$('prevBtn').onclick = () => { selected = moveDate(selected, -1); render(); };
-$('nextBtn').onclick = () => { selected = moveDate(selected, 1); render(); };
-$('todayBtn').onclick = () => { selected = todayInKorea(); render(); };
+$('prevBtn').onclick = () => { selected = moveWeekday(selected, -1); render(); };
+$('nextBtn').onclick = () => { selected = moveWeekday(selected, 1); render(); };
+$('todayBtn').onclick = () => {
+  selected = todayInKorea();
+  if (!isWeekday(selected)) selected = moveWeekday(selected, selected.getDay() === 0 ? -1 : 1);
+  render();
+};
 
 fetch(DATA_URL, { cache: 'no-store' })
   .then(response => { if (!response.ok) throw new Error('데이터 요청 실패'); return response.json(); })
