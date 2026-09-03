@@ -51,13 +51,9 @@ function renderWeek() {
   const root = $('weekList');
   root.innerHTML = '';
 
-  // 선택한 날짜가 속한 주를 기준으로 주 급식을 표시한다.
-  // 따라서 다음 주 월요일로 넘어가면 '이번 주 급식'도 다음 주로 함께 이동한다.
+  // '이번 주'는 오늘이 아니라 현재 선택된 날짜가 속한 주를 기준으로 한다.
   const monday = getMonday(selected);
   const sunday = moveDate(monday, 6);
-  const mondayKey = toKey(monday);
-  const sundayKey = toKey(sunday);
-  const todayKey = toKey(todayInKorea());
   $('weekLabel').textContent = `${monday.getMonth() + 1}/${monday.getDate()}–${sunday.getMonth() + 1}/${sunday.getDate()}`;
 
   for (let i = 0; i < 5; i++) {
