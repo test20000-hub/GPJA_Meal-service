@@ -1,33 +1,88 @@
 * { box-sizing: border-box; }
-:root { font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif; color: #111827; background: #f3f4f6; }
-body { margin: 0; min-height: 100vh; background: linear-gradient(180deg, #f9fafb 0%, #eef2ff 100%); }
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif;
+  color: #171a21;
+  background: #f6f7fb;
+  font-synthesis: none;
+}
+html { background: #f6f7fb; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(99,102,241,.12), transparent 30%),
+    radial-gradient(circle at 100% 15%, rgba(16,185,129,.08), transparent 25%),
+    #f6f7fb;
+}
 button, a { font: inherit; }
-.container { width: min(760px, calc(100% - 32px)); margin: 0 auto; padding: 42px 0 28px; }
-.header { display:flex; justify-content:space-between; gap:20px; align-items:flex-start; margin-bottom:28px; }
-.eyebrow { margin:0 0 6px; font-size:12px; font-weight:800; letter-spacing:.12em; color:#6366f1; }
-h1 { margin:0; font-size:clamp(30px,7vw,44px); letter-spacing:-.04em; }
-.sub { margin:8px 0 0; color:#6b7280; }
-.source { color:#4f46e5; text-decoration:none; font-weight:700; padding:9px 12px; border:1px solid #e5e7eb; border-radius:12px; background:#fff; white-space:nowrap; }
-.date-nav { display:grid; grid-template-columns:44px 64px 1fr 44px; gap:8px; align-items:center; margin-bottom:14px; }
-.date-nav button { height:44px; border:0; border-radius:12px; background:#fff; color:#374151; cursor:pointer; box-shadow:0 1px 3px #0000000d; font-weight:700; }
-#dateLabel { text-align:center; font-weight:800; }
-.meal-card { background:#111827; color:#fff; border-radius:24px; padding:26px; min-height:280px; box-shadow:0 20px 50px #11182724; }
-.card-top { display:flex; justify-content:space-between; color:#a5b4fc; font-weight:700; font-size:14px; }
-.meal-card h2 { margin:26px 0 18px; font-size:24px; letter-spacing:-.03em; }
-.menu-list { list-style:none; padding:0; margin:0; display:grid; gap:10px; }
-.menu-list li { padding:14px 16px; border-radius:14px; background:#ffffff12; font-size:17px; font-weight:650; }
-.empty { color:#d1d5db; padding:30px 0; text-align:center; }
+button { -webkit-tap-highlight-color: transparent; }
+.container { width: min(820px, calc(100% - 32px)); margin: 0 auto; padding: 46px 0 34px; }
+.header { display:flex; justify-content:space-between; gap:24px; align-items:flex-start; margin-bottom:30px; }
+.brand { display:flex; gap:15px; align-items:center; }
+.brand-mark {
+  width:52px; height:52px; flex:0 0 52px; display:grid; place-items:center;
+  border-radius:17px; color:#fff; font-size:16px; font-weight:900; letter-spacing:-.05em;
+  background:linear-gradient(145deg,#6366f1,#4f46e5); box-shadow:0 10px 24px rgba(79,70,229,.25);
+}
+.eyebrow { margin:0 0 5px; font-size:10px; font-weight:900; letter-spacing:.13em; color:#777b89; }
+h1 { margin:0; font-size:clamp(30px,7vw,46px); line-height:1.05; letter-spacing:-.055em; }
+.sub { margin:8px 0 0; color:#777b89; font-size:14px; }
+.source { color:#4f46e5; text-decoration:none; font-size:13px; font-weight:800; padding:11px 14px; border:1px solid #e5e7ef; border-radius:13px; background:rgba(255,255,255,.82); box-shadow:0 4px 16px rgba(20,24,40,.05); white-space:nowrap; }
+.source span { margin-left:3px; }
+.date-nav { display:grid; grid-template-columns:48px 66px 1fr 48px; gap:9px; align-items:center; margin-bottom:14px; }
+.date-nav button { height:46px; border:1px solid #e6e8ef; border-radius:14px; background:rgba(255,255,255,.9); color:#333744; cursor:pointer; box-shadow:0 4px 14px rgba(20,24,40,.05); font-weight:800; transition:.18s ease; }
+.date-nav button:hover { transform:translateY(-1px); box-shadow:0 7px 18px rgba(20,24,40,.08); }
+.date-nav button:active { transform:scale(.97); }
+.icon-btn { font-size:27px; line-height:1; }
+.today-btn { font-size:13px; color:#4f46e5 !important; }
+#dateLabel { text-align:center; font-weight:900; font-size:15px; letter-spacing:-.02em; }
+.meal-card {
+  position:relative; overflow:hidden; isolation:isolate; min-height:330px; padding:28px;
+  color:#fff; border-radius:28px;
+  background:linear-gradient(145deg,#171b2b 0%,#20263a 58%,#171b2b 100%);
+  box-shadow:0 24px 60px rgba(25,29,48,.20);
+}
+.card-glow { position:absolute; z-index:-1; width:260px; height:260px; right:-80px; top:-100px; border-radius:50%; background:rgba(129,140,248,.24); filter:blur(5px); }
+.card-top { display:flex; justify-content:space-between; align-items:center; color:#b9c0d6; font-size:13px; font-weight:750; }
+.kcal { color:#d6dbeb; }
+.meal-heading { margin:27px 0 19px; }
+.meal-badge { display:inline-flex; padding:5px 8px; border-radius:7px; background:rgba(129,140,248,.16); color:#b9c1ff; font-size:10px; font-weight:900; letter-spacing:.13em; }
+.meal-card h2 { margin:11px 0 0; font-size:26px; letter-spacing:-.045em; }
+.menu-list { list-style:none; padding:0; margin:0; display:grid; gap:9px; }
+.menu-list li { padding:14px 16px; border:1px solid rgba(255,255,255,.07); border-radius:15px; background:rgba(255,255,255,.075); font-size:16px; font-weight:650; line-height:1.45; backdrop-filter:blur(8px); }
+.empty { color:#bfc5d5; padding:36px 0; text-align:center; }
 .hidden { display:none; }
-.week-section { margin-top:28px; }
-.section-title { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; }
-.section-title h2 { margin:0; font-size:20px; }
-.section-title span { color:#9ca3af; font-size:13px; }
-.week-list { display:grid; gap:8px; }
-.week-item { width:100%; text-align:left; border:1px solid #e5e7eb; background:#fff; border-radius:16px; padding:15px 16px; cursor:pointer; display:grid; grid-template-columns:78px 1fr; gap:10px; }
-.week-item.active { border-color:#6366f1; box-shadow:0 0 0 2px #6366f11a; }
-.week-date { font-weight:800; }
-.week-menu { color:#6b7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-footer { margin-top:28px; color:#9ca3af; font-size:12px; line-height:1.6; }
+.week-section { margin-top:38px; }
+.section-title { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:13px; }
+.section-kicker { margin:0 0 3px; color:#7d8190; font-size:10px; font-weight:900; letter-spacing:.14em; }
+.section-title h2 { margin:0; font-size:23px; letter-spacing:-.04em; }
+.section-title span { color:#9a9eaa; font-size:12px; }
+.week-list { display:grid; gap:9px; }
+.week-item { width:100%; text-align:left; border:1px solid #e7e9ef; background:rgba(255,255,255,.88); border-radius:18px; padding:16px 17px; cursor:pointer; display:grid; grid-template-columns:82px 1fr; gap:12px; align-items:center; box-shadow:0 3px 12px rgba(20,24,40,.035); transition:.18s ease; }
+.week-item:hover { transform:translateY(-1px); border-color:#d9dcef; box-shadow:0 8px 22px rgba(20,24,40,.07); }
+.week-item.active { border-color:#6366f1; box-shadow:0 0 0 3px rgba(99,102,241,.11), 0 8px 22px rgba(20,24,40,.07); background:#fff; }
+.week-date { font-weight:900; font-size:13px; }
+.week-menu { color:#6f7482; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; line-height:1.5; }
+footer { margin-top:34px; padding-top:20px; border-top:1px solid #e7e9ef; color:#9b9eaa; font-size:11px; line-height:1.7; }
 footer p { margin:2px 0; }
-.loading { opacity:.8; }
-@media (max-width: 560px) { .container { width:min(100% - 20px,760px); padding-top:24px; } .header { flex-direction:column; } .source { align-self:flex-start; } .date-nav { grid-template-columns:42px 58px 1fr 42px; } .meal-card { padding:22px; border-radius:20px; } }
+.loading { opacity:.86; }
+@media (max-width: 560px) {
+  .container { width:min(100% - 20px,820px); padding:25px 0 26px; }
+  .header { gap:15px; margin-bottom:23px; }
+  .brand { align-items:flex-start; }
+  .brand-mark { width:44px; height:44px; flex-basis:44px; border-radius:14px; font-size:14px; }
+  .eyebrow { font-size:9px; }
+  h1 { font-size:31px; }
+  .sub { font-size:13px; }
+  .source { padding:9px 11px; font-size:12px; }
+  .date-nav { grid-template-columns:44px 61px 1fr 44px; gap:7px; }
+  .date-nav button { height:44px; }
+  #dateLabel { font-size:14px; }
+  .meal-card { min-height:310px; padding:22px; border-radius:23px; }
+  .meal-card h2 { font-size:23px; }
+  .menu-list li { padding:13px 14px; font-size:15px; }
+  .week-section { margin-top:31px; }
+  .week-item { grid-template-columns:68px 1fr; padding:14px; border-radius:16px; }
+  .week-menu { font-size:12px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior:auto !important; transition:none !important; } }
