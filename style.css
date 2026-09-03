@@ -1,0 +1,33 @@
+* { box-sizing: border-box; }
+:root { font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif; color: #111827; background: #f3f4f6; }
+body { margin: 0; min-height: 100vh; background: linear-gradient(180deg, #f9fafb 0%, #eef2ff 100%); }
+button, a { font: inherit; }
+.container { width: min(760px, calc(100% - 32px)); margin: 0 auto; padding: 42px 0 28px; }
+.header { display:flex; justify-content:space-between; gap:20px; align-items:flex-start; margin-bottom:28px; }
+.eyebrow { margin:0 0 6px; font-size:12px; font-weight:800; letter-spacing:.12em; color:#6366f1; }
+h1 { margin:0; font-size:clamp(30px,7vw,44px); letter-spacing:-.04em; }
+.sub { margin:8px 0 0; color:#6b7280; }
+.source { color:#4f46e5; text-decoration:none; font-weight:700; padding:9px 12px; border:1px solid #e5e7eb; border-radius:12px; background:#fff; white-space:nowrap; }
+.date-nav { display:grid; grid-template-columns:44px 64px 1fr 44px; gap:8px; align-items:center; margin-bottom:14px; }
+.date-nav button { height:44px; border:0; border-radius:12px; background:#fff; color:#374151; cursor:pointer; box-shadow:0 1px 3px #0000000d; font-weight:700; }
+#dateLabel { text-align:center; font-weight:800; }
+.meal-card { background:#111827; color:#fff; border-radius:24px; padding:26px; min-height:280px; box-shadow:0 20px 50px #11182724; }
+.card-top { display:flex; justify-content:space-between; color:#a5b4fc; font-weight:700; font-size:14px; }
+.meal-card h2 { margin:26px 0 18px; font-size:24px; letter-spacing:-.03em; }
+.menu-list { list-style:none; padding:0; margin:0; display:grid; gap:10px; }
+.menu-list li { padding:14px 16px; border-radius:14px; background:#ffffff12; font-size:17px; font-weight:650; }
+.empty { color:#d1d5db; padding:30px 0; text-align:center; }
+.hidden { display:none; }
+.week-section { margin-top:28px; }
+.section-title { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; }
+.section-title h2 { margin:0; font-size:20px; }
+.section-title span { color:#9ca3af; font-size:13px; }
+.week-list { display:grid; gap:8px; }
+.week-item { width:100%; text-align:left; border:1px solid #e5e7eb; background:#fff; border-radius:16px; padding:15px 16px; cursor:pointer; display:grid; grid-template-columns:78px 1fr; gap:10px; }
+.week-item.active { border-color:#6366f1; box-shadow:0 0 0 2px #6366f11a; }
+.week-date { font-weight:800; }
+.week-menu { color:#6b7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+footer { margin-top:28px; color:#9ca3af; font-size:12px; line-height:1.6; }
+footer p { margin:2px 0; }
+.loading { opacity:.8; }
+@media (max-width: 560px) { .container { width:min(100% - 20px,760px); padding-top:24px; } .header { flex-direction:column; } .source { align-self:flex-start; } .date-nav { grid-template-columns:42px 58px 1fr 42px; } .meal-card { padding:22px; border-radius:20px; } }
