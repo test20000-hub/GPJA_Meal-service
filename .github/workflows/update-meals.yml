@@ -21,8 +21,8 @@ jobs:
         with:
           python-version: '3.x'
       - name: Install dependencies
-        run: pip install requests
-      - name: Fetch meals from NEIS
+        run: pip install requests beautifulsoup4
+      - name: Fetch meals from NEIS + school page fallback
         env:
           NEIS_API_KEY: ${{ secrets.NEIS_API_KEY }}
         run: python scripts/fetch_neis_meals.py
@@ -31,5 +31,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/meals.json
-          git diff --cached --quiet || git commit -m 'chore: update school meals from NEIS'
+          git diff --cached --quiet || git commit -m 'chore: update school meals from NEIS and school page'
           git push
